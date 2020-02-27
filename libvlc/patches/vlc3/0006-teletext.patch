@@ -1,0 +1,31 @@
+commit 04f73ed34add0bb764fdb364c35e9d73c7714751
+Author: VLC Android <buildbot@videolan.org>
+Date:   Thu Feb 27 03:08:13 2020 +0000
+
+    teletext changes
+
+diff --git a/include/vlc/libvlc_media_player.h b/include/vlc/libvlc_media_player.h
+index bc0d1f774c..601fde92d7 100644
+--- a/include/vlc/libvlc_media_player.h
++++ b/include/vlc/libvlc_media_player.h
+@@ -1340,6 +1340,8 @@ LIBVLC_API char *libvlc_video_get_crop_geometry( libvlc_media_player_t *p_mi );
+ LIBVLC_API
+ void libvlc_video_set_crop_geometry( libvlc_media_player_t *p_mi, const char *psz_geometry );
+ 
++LIBVLC_API void libvlc_set_teletext_opaque( libvlc_media_player_t *p_mi, bool value );
++
+ /**
+  * Get current teletext page requested or 0 if it's disabled.
+  *
+diff --git a/lib/video.c b/lib/video.c
+index acbba3a30f..0b00a5c066 100644
+--- a/lib/video.c
++++ b/lib/video.c
+@@ -1086,3 +1086,7 @@ float libvlc_video_get_adjust_float( libvlc_media_player_t *p_mi,
+ {
+     return get_float( p_mi, "adjust", adjust_option_bynumber(option) );
+ }
++
++void libvlc_set_teletext_opaque(libvlc_media_player_t *p_mi, bool value) {
++    var_SetBool(p_mi, "vbi-opaque", value);
++}

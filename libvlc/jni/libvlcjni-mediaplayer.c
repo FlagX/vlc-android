@@ -1248,3 +1248,53 @@ Java_org_videolan_libvlc_MediaPlayer_00024Equalizer_nativeSetAmp(JNIEnv *env,
 
     return libvlc_audio_equalizer_set_amp_at_index(p_eq, amp, index) == 0 ? true : false;
 }
+
+void
+Java_org_videolan_libvlc_MediaPlayer_nativeSetTeletext(JNIEnv *env,
+                                                       jobject thiz, jint page)
+{
+    vlcjni_object *p_obj = VLCJniObject_getInstance(env, thiz);
+
+    if (!p_obj)
+            return;
+
+    libvlc_video_set_teletext(p_obj->u.p_mp, page);
+}
+
+jint
+Java_org_videolan_libvlc_MediaPlayer_nativeGetTeletext(JNIEnv *env,
+                                                       jobject thiz)
+{
+    vlcjni_object *p_obj = VLCJniObject_getInstance(env, thiz);
+
+    if (!p_obj)
+        return -2;
+
+    return libvlc_video_get_teletext(p_obj->u.p_mp);
+}
+
+void
+Java_org_videolan_libvlc_MediaPlayer_nativeToggleTeletext(JNIEnv *env,
+                                                       jobject thiz)
+{
+    vlcjni_object *p_obj = VLCJniObject_getInstance(env, thiz);
+
+    if (!p_obj)
+            return;
+
+    libvlc_toggle_teletext(p_obj->u.p_mp);
+}
+
+
+void
+Java_org_videolan_libvlc_MediaPlayer_nativeSetTeletextOpaque(JNIEnv *env,
+                                                       jobject thiz, jboolean value)
+{
+    vlcjni_object *p_obj = VLCJniObject_getInstance(env, thiz);
+
+    if (!p_obj)
+            return;
+
+    libvlc_set_teletext_opaque(p_obj->u.p_mp, value);
+}
+
